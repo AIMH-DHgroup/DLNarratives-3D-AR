@@ -14,6 +14,61 @@ body {
     text-align: center;
 }
 
+/* start loader */
+#loader, #entity-loader {
+    aspect-ratio: 1;
+    -webkit-mask: conic-gradient(from 15deg,#0000,#000);
+    animation: l26 1s infinite steps(12);
+    z-index: 9999999;
+}
+
+#loader {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+}
+
+#entity-loader {
+    display: grid;
+    position: relative;
+    width: 25px;
+    overflow: hidden;
+}
+
+#entity-loader-div {
+    display: inline-flex;
+    position: relative;
+    width: fit-content;
+    vertical-align: middle;
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+#loader, #loader:before, #loader:after, #entity-loader, #entity-loader:before, #entity-loader:after {
+    background:
+            radial-gradient(closest-side at 50% 12.5%,
+            #f03355 96%,#0000) 50% 0/20% 80% repeat-y,
+            radial-gradient(closest-side at 12.5% 50%,
+            #f03355 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+
+#loader:before, #loader:after, #entity-loader:before, #entity-loader:after {
+    content: "";
+    grid-area: 1/1;
+    transform: rotate(30deg);
+}
+
+#loader:after, #entity-loader:after {
+    transform: rotate(60deg);
+}
+
+@keyframes l26 {
+    100% {transform:rotate(1turn)}
+}
+/* end loader */
+
 h1 {
     font-size: 26px;
     font-weight: bold;
