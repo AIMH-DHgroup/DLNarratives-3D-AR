@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+        <title>DLNarratives - 3D and AR version</title>
+        <link rel="stylesheet" type="text/css" href="./../lib/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./lib/style_main.css">
+        <script src="./lib/es6-shim.min.js"></script>
+        <script src="./lib/jquery-3.2.1.min.js"></script>
+        <script src="./lib/jquery-ui.min.js"></script>
+        <script src="./lib/bootstrap.min.js"></script>
+        <script src="./lib/script_main.js"></script>
+
+    </head>
+    <body>
+
+        <div class="container">
+
+            <h1>DLNarratives - 3D and AR version</h1>
+
+            <div id="alert-placeholder"></div>
+            <div id="loader"></div>
+
+            <form id="form-model">
+
+                <div id="model-div">
+
+                    <label for="models-available">Select a model:</label>
+                    <select id="models-available" class="form-control centered mb-3">
+                        <option selected disabled>Select a model</option>
+                    </select>
+                    <p id="or">or</p>
+                    <button type="button" id="upload-model" class="btn btn-primary" onclick="document.getElementById('model-input').click();">Upload model</button>
+                    <input type="file" id="model-input" class="hidden" accept=".glb">
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </body>
+
+</html>

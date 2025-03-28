@@ -1,0 +1,94 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#or {
+    margin-bottom: 5px;
+}
+
+select {
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+}
+
+.hidden {
+    display: none;
+}
+
+#model-div {
+    width: 75%;
+    text-align: center;
+}
+
+#models-available {
+    width: fit-content;
+    margin: 2px;
+}
+
+.centered {
+    display: inline-block;
+    width: 15%;
+    margin: 0 auto;
+}
+
+#upload-model {
+    width: fit-content;
+    margin: 2px;
+}
+
+#model-input {
+    display: none;
+}
+
+#form-model {
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+#alert-placeholder {
+    position: fixed;
+    top: 5vh;
+    z-index: 999;
+    margin: auto !important;
+    width: fit-content;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.alert {
+    display: none;
+    margin: auto !important;
+}
+
+.not-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

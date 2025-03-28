@@ -1,0 +1,620 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+}
+
+/* start loader */
+#loader, #entity-loader {
+    aspect-ratio: 1;
+    display: grid;
+    -webkit-mask: conic-gradient(from 15deg,#0000,#000);
+    animation: l26 1s infinite steps(12);
+    z-index: 9999999;
+}
+
+#loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+}
+
+#entity-loader {
+    position: relative;
+    width: 25px;
+    overflow: hidden;
+}
+
+#entity-loader-div {
+    display: inline-flex;
+    position: relative;
+    width: fit-content;
+    vertical-align: middle;
+    margin: 5px;
+    padding: 5px 10px;
+}
+
+#loader, #loader:before, #loader:after, #entity-loader, #entity-loader:before, #entity-loader:after {
+    background:
+            radial-gradient(closest-side at 50% 12.5%,
+            #f03355 96%,#0000) 50% 0/20% 80% repeat-y,
+            radial-gradient(closest-side at 12.5% 50%,
+            #f03355 96%,#0000) 0 50%/80% 20% repeat-x;
+}
+
+#loader:before, #loader:after, #entity-loader:before, #entity-loader:after {
+    content: "";
+    grid-area: 1/1;
+    transform: rotate(30deg);
+}
+
+#loader:after, #entity-loader:after {
+    transform: rotate(60deg);
+}
+
+@keyframes l26 {
+    100% {transform:rotate(1turn)}
+}
+/* end loader */
+
+.fa-circle-info {
+    color: white;
+}
+
+.modal {
+    z-index: 999999;
+}
+
+#video {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    object-fit: cover;
+    width: 100vw;
+    height: 100vh;
+}
+
+#api-frame {
+    display: none;
+    visibility: hidden;
+}
+
+#help-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+}
+
+
+.annotation {
+    position: absolute;
+    top: 0; /*0*/
+    left: 0; /*0*/
+    z-index: 99999;
+    margin-left: 0;
+    margin-top: 0;
+    padding: 1em;
+    /*width: 300px;*/
+    width: 45%;
+    max-height: fit-content;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: .5em;
+    font-size: 12px;
+    line-height: 1.2;
+    transition: opacity .5s;
+    /*width: 15vw;*/
+    height: 35vh;
+    overflow: scroll;
+    &::before {
+        /*content: attr(data-before);*/
+        position: absolute;
+        top: -30px;
+        left: -30px;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.8);
+    }
+}
+
+
+.number {
+    position: absolute;
+    z-index: -1;
+    display: none;
+}
+
+#toolbar-container {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 100%;
+    background-color: lightgrey;
+    border: 1px solid white;
+}
+
+#annotationsPanel {
+    position: absolute;
+    width: auto;
+    height: auto;
+    color: white;
+    top: 60px;
+    left: 4px;
+    font-size: 2vmin;
+    text-wrap: nowrap;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#buttons-container {
+    position: absolute;
+    bottom: 20px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    display: flex;
+    left: calc(42.5% - 50px);
+    align-items: center;
+}
+
+#custom-annotations, #ARButton {
+    top: 50vh;
+    right: 4px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 12px 6px;
+    border: 1px solid rgb(255, 255, 255);
+    font: 13px sans-serif;
+    opacity: 0.5;
+    z-index: 0;
+    cursor: pointer;
+    width: 150px;
+    color: #fff;
+    transition: 0.2s;
+}
+
+#custom-annotations {
+    margin-right: 5px;
+}
+
+#custom-annotations:hover, #ARButton:hover {
+    color: #000 !important;
+    background-color: #fff !important;
+    transition: 0.2s;
+}
+
+#alert-placeholder {
+    position: fixed;
+    top: 5vh;
+    z-index: 999;
+    margin: auto !important;
+    width: fit-content;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.alert {
+    display: none;
+    margin: auto !important;
+}
+
+#panel-title-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.annotation-item {
+    display: flex;
+    border: 1px solid rgb(158, 158, 158);
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.delete-annotation {
+    color: #000;
+}
+
+#digobj-table {
+    transition: 0.2s;
+    padding: 1vh 0;
+}
+
+#digobj-table a {
+    height: 100%;
+    position: relative;
+    text-decoration: none;
+    color: #222 !important;
+    margin-right: 1vw;
+    white-space: nowrap;
+}
+
+.digobj-preview {
+    display: inline-flex;
+    text-align: center;
+    padding: 20px;
+    margin-top: 1%;
+    border: solid 1px #bbb;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 100%;
+    box-shadow: 1px 1px 3px lightgrey;
+    min-width: 100px;
+    max-width: 150px;
+    width: 100%;
+}
+
+#digobj-table a div:hover {
+    background-color: rgb(247, 243, 245);
+}
+
+.digobj-deleteButton {
+    font-size: 90%;
+    position: absolute;
+    top: -20px;
+    left: 5px;
+}
+
+.wikidata-entities:hover {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05));
+}
+
+.hidden-true-value {
+    display: none !important;
+}
+
+.annotation-name, .draggable-symbol, .annotation-buttons-div {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.annotation-title-div {
+    flex: 0 0 150px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.annotation-buttons-div {
+    display: flex;
+    gap: 5px;
+}
+
+.annotation-description h5 {
+    margin-top: .5rem;
+}
+
+.dragging {
+    opacity: 0.5;
+    background-color: #e0e0e0;
+    cursor: grabbing;
+}
+
+#checkbox-div {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    margin: auto;
+}
+
+#checkbox-label {
+    vertical-align: middle;
+    margin-bottom: 0 !important;
+    width: 100%;
+    color: #333;
+    margin-left: 5px;
+}
+
+#checkbox-div {
+    color: white;
+}
+
+#annotationsPanel ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+}
+
+.annotationButton {
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.annotationButton, #add-annotation-button {
+    text-align: left;
+    border: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+.disable-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+}
+
+#scene-container {
+    height: 70vh;
+    grid-column: 1 / 2;
+    grid-row: 1;
+    background-color: #f3f3f3;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+#panel-container {
+    grid-column: 1 / 2;
+    grid-row: 2;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+    z-index: 2; /* prevent annotation to overlap */
+}
+
+#form-container {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 2; /* prevent annotation to overlap */
+    overflow: scroll;
+}
+
+.form-group {
+    margin-bottom: 2.5% !important;
+    display: block;
+}
+
+.form-label {
+    display: table-row;
+    width: 18%;
+    color: #4A4A4A;
+    font-weight: normal;
+    vertical-align: middle;
+    border: none;
+    text-align: left;
+    height: 8%;
+    max-width: 100%;
+    margin-bottom: 0 !important;
+}
+
+input:focus {
+    outline: none;
+}
+
+.text-input {
+    border-radius: 0 !important;
+    text-align: left !important;
+    padding: 5px;
+    display: inline-block;
+    margin: 0 auto;
+    width: 100%;
+}
+
+#change-coordinates {
+    margin-top: 10px;
+}
+
+#button-group {
+    margin-top: 10px;
+}
+
+#panel-title {
+    float: left;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 10px;
+    gap: 10px;
+}
+
+#add-annotation-button {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 4px;
+    text-wrap: nowrap;
+    font-size: 2vmin;
+    width: auto;
+    height: auto;
+    overflow: visible;
+}
+
+#form-inner {
+    display: none;
+}
+
+.tooltip-div {
+    width: 100%;
+}
+
+.label-tooltip {
+    display: inline-block;
+    width: auto;
+}
+
+.tooltips {
+    cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
+}
+
+.tooltips .fa-circle-info {
+    color: #337ab7 !important;
+}
+
+.tooltip {
+    z-index: 99999;
+}
+
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    transition: 0ms;
+}
+
+.btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    transition: 0ms;
+}
+
+.btn-default:active {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+    transition: 0ms;
+}
+
+.btn-delete {
+    background-color: white;
+    border: 1px solid #bbb;
+    color: #AD1A00;
+}
+
+.btn-delete:hover {
+    color: white;
+    background-color: #c92723;
+}
+
+#selected-items {
+    margin-top: 10px;
+}
+
+.input-group-btn {
+    width: auto;
+    vertical-align: middle;
+}
+
+#digobj-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.tooltip-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.label-tooltip {
+    margin-right: 5px;
+}
+
+#digobj-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#digobj-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+}
+
+#digobj-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#digobj-button {
+    align-self: center;
+}
+
+#digobj-label-title {
+    display: none;
+}
+
+.not-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.form-control::placeholder {
+    color: #8C939B !important;
+    opacity: 1; /* Firefox */
+}
+
+.form-control::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #8C939B !important;
+}
+
+/* Custom annotations page responsive */
+@media (max-width: 768px) {
+    #grid-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+
+    #scene-container {
+        grid-column: 1;
+        grid-row: 1;
+        height: 200px;
+    }
+
+    #panel-container {
+        grid-column: 1;
+        grid-row: 2;
+        z-index: 2; /* prevent annotation to overlap */
+    }
+
+    #form-container {
+        grid-column: 1;
+        grid-row: 3;
+        z-index: 2; /* prevent annotation to overlap */
+    }
+}

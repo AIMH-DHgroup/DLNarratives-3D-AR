@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <title>DLNarratives - Customize annotations</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="./lib/style.css">
+        <script type='text/javascript' src='https://tool.dlnarratives.eu/a_JHSiJ48F_1z1_6EUdqT2BjeuCbU0yz5pmb7ih92LNGPUl5iCtJee-SLuz33cchepnIKMr-v-Cc8-6SMijlIg=='></script>
+        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+        <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+        <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="./lib/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+        <script src="./lib/require.js"></script>
+        <script type="module" src="./lib/components.js"></script>
+        <script type="module" src="./lib/load_model.js"></script>
+        <script src="./lib/custom_annotations.js"></script>
+
+    </head>
+
+    <body id="index-container">
+        <div id="alert-placeholder"></div>
+        <div id="loader"></div>
+        <div id="annotationsPanel" class="disable-select"></div>
+
+        <div id="grid-container">
+            <div id="scene-container">
+                <button type="button" id="add-annotation-button">Add annotation (+)</button>
+                <div id="help-container" data-toggle="modal" data-target=".modal">
+                    <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
+                </div>
+            </div>
+            <div id="form-container">
+                <div id="form-inner">
+                    <h3 id="form-title">Edit annotation</h3>
+                    <span id="old-position" style="display: none;"></span>
+                    <p id="mandatory-fields">(*) are mandatory</p>
+                    <form id="new-annotation-form">
+
+                        <div id="event-id-container" class="form-group" style="display: none;">
+                            <label for="event-id" class="form-label">Event ID</label>
+                            <input type="text" class="form-control" id="event-id" readonly>
+                        </div>
+
+                        <div id="title-container" class="form-group">
+                            <label for="title" class="form-label">Title (*)</label>
+                            <input id="title" class="text-input form-control" autocomplete="off" placeholder="Insert title..." required>
+                        </div>
+
+                        <div id="description-container" class="form-group">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea id="description" class="text-input form-control" autocomplete="off" placeholder="Insert description..."></textarea>
+                        </div>
+
+                        <div id="coordinates-container" class="form-group">
+                            <div class="tooltip-div">
+                                <label for="coordinates" class="form-label label-tooltip">Coordinates (*)</label>
+                                <a class="tooltips" data-bs-toggle="tooltip" title="Coordinates can have multiple decimal digits and must be submitted in this format: x.xxxx,y.yyyy,z.zzzz.
+                                            The button 'Change coordinates' is used to change coordinates directly on the 3D scene." href="#">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+                            </div>
+                            <input id="coordinates" class="text-input form-control" autocomplete="off" placeholder="Insert coordinates...">
+                            <button type="button" class="btn btn-default" id="change-coordinates" onclick="changeCoors();">Change coordinates</button>
+                        </div>
+
+                        <div id="digobj-container" class="form-group">
+                            <div class="tooltip-div">
+                                <label for="digobj-url" class="form-label label-tooltip">Digital objects</label>
+                                <a class="tooltips" data-bs-toggle="tooltip" title="A valid URL is required, e.g. https://www.example.com" href="#">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+                            </div>
+                            <div id="digobj-group">
+                                <div id="digobj-input-container">
+                                    <input id="digobj-url" class="text-input form-control" autocomplete="off" placeholder="Insert URL...">
+                                    <input id="digobj-title" class="text-input form-control" autocomplete="off" placeholder="Insert digital object title...">
+                                    <label for="digobj-title" id="digobj-label-title" class="form-label">Digital object title</label>
+                                </div>
+                                <div id="digobj-button-container">
+                                    <button type="button" id="digobj-button" class="btn btn-default" onclick="addDigitalObject(document.getElementById('digobj-url').value.trim(), document.getElementById('digobj-title').value, false, true);">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="digobj-table" class="form-group"></div>
+
+                        <div id="entities-container" class="form-group">
+                            <div class="tooltip-div">
+                                <label for="entities" class="form-label label-tooltip">Entities</label>
+                                <a class="tooltips" data-bs-toggle="tooltip" title="Entities are searched on Wikidata." href="#">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+                            </div>
+                            <input id="entities" class="text-input form-control" spellcheck="false" placeholder="Search entities...">
+                            <div id="selected-items"></div>
+                        </div>
+
+                        <div id="position-container" class="form-group">
+                            <div class="tooltip-div">
+                                <label for="position" class="form-label label-tooltip">Position in list (*)</label>
+                                <a class="tooltips" data-bs-toggle="tooltip" title="Insert an integer value between 1 and the last annotation." href="#">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                </a>
+                            </div>
+                            <input id="position" class="text-input form-control" autocomplete="off" placeholder="Insert position...">
+                        </div>
+
+                        <div id="button-group">
+                            <button id="save-annotation" type="button" class="btn btn-primary" onclick="saveJSONAnnotations();" disabled>Save changes</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div id="panel-container">
+                <div id="panel-title-buttons">
+                    <h3 id="panel-title">Annotations</h3>
+                    <div id="custom-buttons-container"></div>
+                </div>
+                <div id="annotations-container"></div>
+            </div>
+        </div>
+
+        <!-- Modal container -->
+        <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-dismiss"></button>
+                        <button type="button" class="btn btn-primary" id="modal-confirm" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>

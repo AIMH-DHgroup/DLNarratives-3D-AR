@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Model Viewer AR - VR</title>
+  <meta name="description" content="Model Viewer (VR / AR) • A-Frame">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.2/aframe/build/aframe-ar.js"></script>
+  <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+  <script src="./lib/info-message.js"></script>
+  <script src="https://unpkg.com/aframe-extras@3.3.0/dist/aframe-extras.min.js"></script>
+  <script src="./lib/hide-on-enter-ar.js"></script>
+  <script src="./lib/ar-shadows.js"></script>
+  <script src="./lib/ar-hit-test.js"></script>
+  <script src="./lib/model-viewer.js"></script>
+  <script src="./lib/background-gradient.js"></script>
+  <!--<script src="./lib/load_model.js"></script>
+  <script src="./lib/components.js"></script>-->
+  <link rel="stylesheet" href="./lib/style.css">
+</head>
+<body id="index-container">
+
+<!--<div id="spinner-container">
+  <img src="./../img/spinner.gif" alt="Loading icon" height="28" width="28">
+</div>-->
+
+<a-scene
+  embedded
+  arjs="debugUIEnabled: false;"
+  renderer="colorManagement: true; shadowMap: true;"
+  info-message="htmlSrc: #messageText"
+  model-viewer="gltfModel: #viola; title: Viola di Gasparo da Salo'; uploadUIEnabled: false;"
+  id="a-scene-main">
+
+  <!-- Definisci gli asset -->
+  <a-assets>
+    <a-asset-item id="viola"
+      src="./gasparo_da_salos_viola_1580.glb"
+      response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
+    <a-asset-item id="reticle"
+      src="https://cdn.aframe.io/examples/ar/models/reticle/reticle.gltf"
+      response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+
+    <img id="shadow" src="https://cdn.glitch.com/20600112-c04b-492c-8190-8a5ccc06f37d%2Fshadow.png?v=1606338852399"></img>
+    <a-asset-item id="messageText" src="./lib/message.html"></a-asset-item>
+  </a-assets>
+
+  <!-- Modello 3D caricato tramite A-Frame -->
+  <a-entity gltf-model="#viola" scale="0.05 0.05 0.05" position="0 0 0" shadow="receive: true; cast: true"></a-entity>
+
+  <!-- Simulazione di ombra con texture -->
+  <a-plane rotation="-90 0 0" width="2" height="2" material="src: #shadow; transparent: true" shadow="receive: true"></a-plane>
+
+  <!-- Aggiungi una luce direzionale per abilitare le ombre -->
+  <a-light type="directional" position="0 4 4" intensity="1" castShadow="true"></a-light>
+
+  <!-- Aggiungi una telecamera AR -->
+  <a-entity camera></a-entity>
+
+</a-scene>
+
+</body>
+</html>

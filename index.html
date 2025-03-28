@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Example of A-Frame implementation</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Mouse Click Example - A-Frame">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link rel="stylesheet" href="./lib/style.css">
+        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
+        <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+        <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="./lib/jquery-ui.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="./lib/require.js"></script>
+        <script type="module" src="./lib/components.js"></script>
+        <script type="module" src="./lib/load_model.js"></script>
+    </head>
+
+    <body id="index-container">
+        <div id="annotationsPanel" class="disable-select"></div>
+        <div id="loader"></div>
+        <div id="help-container" data-toggle="modal" data-target=".modal">
+            <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
+        </div>
+
+        <!-- Modal container -->
+        <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-dismiss"></button>
+                        <button type="button" class="btn btn-primary" id="modal-confirm" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
