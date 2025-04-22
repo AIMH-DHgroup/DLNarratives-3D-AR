@@ -150,6 +150,8 @@ body {
     position: absolute;
     width: auto;
     height: auto;
+    max-width: 180px;
+    max-height: 85%;
     color: white;
     top: 60px;
     left: 4px;
@@ -289,7 +291,7 @@ body {
 }
 
 .annotation-title-div {
-    flex: 0 0 150px !important;
+    flex: 0 0 350px !important;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -340,6 +342,7 @@ body {
     cursor: pointer;
     padding: 10px;
     margin: 5px 0;
+    overflow: hidden;
 }
 
 .annotationButton, #add-annotation-button {

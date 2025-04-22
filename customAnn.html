@@ -65,12 +65,13 @@
                             <div class="tooltip-div">
                                 <label for="coordinates" class="form-label label-tooltip">Coordinates (*)</label>
                                 <a class="tooltips" data-bs-toggle="tooltip" title="Coordinates can have multiple decimal digits and must be submitted in this format: x.xxxx,y.yyyy,z.zzzz.
-                                            The button 'Change coordinates' is used to change coordinates directly on the 3D scene." href="#">
+                                            The button 'Change coordinates' is used to change coordinates directly on the 3D scene and the camera position. Please note that the latter must be set in position before clicking 'Change coordinates'." href="#">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </a>
                             </div>
                             <input id="coordinates" class="text-input form-control" autocomplete="off" placeholder="Insert coordinates...">
                             <button type="button" class="btn btn-default" id="change-coordinates" onclick="changeCoors();">Change coordinates</button>
+                            <span id="camera-position" style="display: none;"></span>
                         </div>
 
                         <div id="digobj-container" class="form-group">
@@ -115,7 +116,7 @@
                         </div>
 
                         <div id="button-group">
-                            <button id="save-annotation" type="button" class="btn btn-primary" onclick="saveJSONAnnotations();" disabled>Save changes</button>
+                            <button id="save-annotation" type="button" class="btn btn-primary" onclick="saveJSONAnnotations(true);" disabled>Save changes</button>
                         </div>
 
                     </form>
