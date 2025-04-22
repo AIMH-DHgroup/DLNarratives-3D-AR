@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-        <title>Example of A-Frame implementation</title>
+
         <meta charset="UTF-8">
-        <meta name="description" content="Mouse Click Example - A-Frame">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-        <link rel="stylesheet" href="./lib/style.css">
-        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-        <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
-        <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
+        <title>DLNarratives - 3D and AR version</title>
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <link rel="stylesheet" type="text/css" href="./../lib/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="./lib/style_main.css">
+        <script src="./lib/es6-shim.min.js"></script>
+        <script src="./lib/jquery-3.2.1.min.js"></script>
         <script src="./lib/jquery-ui.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <script src="./lib/require.js"></script>
-        <script type="module" src="./lib/load_model.js"></script>
+        <script src="./lib/bootstrap.min.js"></script>
+        <script src="./lib/script_main.js"></script>
+
     </head>
+    <body>
 
-    <body id="index-container">
-        <div id="annotationsPanel" class="disable-select"></div>
-        <div id="loader"></div>
-        <div id="help-container" data-toggle="modal" data-target=".modal">
-            <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
-        </div>
+        <div class="container">
 
-        <!-- Modal container -->
-        <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-dismiss"></button>
-                        <button type="button" class="btn btn-primary" id="modal-confirm" data-dismiss="modal"></button>
-                    </div>
+            <h1>DLNarratives - 3D and AR version</h1>
+
+            <div id="alert-placeholder"></div>
+            <div id="loader"></div>
+
+            <form id="form-model">
+
+                <div id="model-div">
+
+                    <label for="models-available">Select a model:</label>
+                    <select id="models-available" class="form-control centered mb-3">
+                        <option selected disabled>Select a model</option>
+                    </select>
+                    <p id="or">or</p>
+                    <button type="button" id="upload-model" class="btn btn-primary" onclick="document.getElementById('model-input').click();">Upload model</button>
+                    <input type="file" id="model-input" class="hidden" accept=".glb">
+
                 </div>
-            </div>
+
+            </form>
+
         </div>
+
+        <footer>
+
+            <div id="logo-container"><img id="logo" src="img/aimh-lab.png" alt="AIMH-Lab logo"> <p> &copy; 2025 <a href="https://www.isti.cnr.it/en/" target="_blank">ISTI-CNR</a>, <a href="https://aimh.isti.cnr.it/research-highlights-humanities/" target="_blank">Digital Humanities Group of AIMH-Lab</a>. All rights reserved.</p></div>
+
+            <p>GitHub repository available <a href="https://github.com/AIMH-DHgroup/DLNarratives-3D-AR" target="_blank">here</a>.</p>
+
+        </footer>
+
     </body>
 
 </html>
