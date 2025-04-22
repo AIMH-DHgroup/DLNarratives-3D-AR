@@ -7,6 +7,7 @@ This is a semi-automatic tool to construct and visualise "3D and AR narratives",
 -  📷 AR mode
 -  📝 Annotation editor
 -  💾 Export JSON file
+-  💯 Compatibility with SMBVT
 
 ## Dependencies
 If you want to install this tool on your machine, you have to install software like XAMPP that provides the Apache web server and the latest versions of PHP.
