@@ -17,3 +17,15 @@ There is no need to configure anything. The main page is index0.html in the root
 
 ## Help/Feedback
 If you need help or want to leave feedback, check out the discussions [here](https://github.com/AIMH-DHgroup/3D-annotation-tool/discussions) or start a new one.
+
+## Dependencies
+To use the tool, the following software is needed:
+- [PostgreSQL](https://www.postgresql.org/)
+- If you want to install the system on your machine, you have to install software like XAMPP that provides the Apache web server and the latest versions of PHP.
+
+## Configuration and Installation
+After installing PostgreSQL, you must create a database and import the two tables contained in the SQL folder. The config file to update your connection data is try/PgConn.php. 
+
+After installing Apache Jena Fuseki, you need to create a dataset called "narratives" and the public endpoint "narratives/query".
+
+In the end, you can use an FTP client (such as Filezilla) to upload all the files on your server or in the folder htdocs, if you are using XAMPP on your machine.
