@@ -6,24 +6,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
         <title>DLNarratives - Customize annotations</title>
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="./lib/style.css">
-        <script type='text/javascript' src='https://tool.dlnarratives.eu/a_JHSiJ48F_1z1_6EUdqT2BjeuCbU0yz5pmb7ih92LNGPUl5iCtJee-SLuz33cchepnIKMr-v-Cc8-6SMijlIg=='></script>
-        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-        <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
         <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="./lib/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
         <script src="./lib/require.js"></script>
-        <script type="module" src="./lib/components.js"></script>
         <script type="module" src="./lib/load_model.js"></script>
-        <script src="./lib/custom_annotations.js"></script>
 
     </head>
 
@@ -33,12 +27,31 @@
         <div id="annotationsPanel" class="disable-select"></div>
 
         <div id="grid-container">
+
             <div id="scene-container">
+
                 <button type="button" id="add-annotation-button">Add annotation (+)</button>
-                <div id="help-container" data-toggle="modal" data-target=".modal">
-                    <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
+
+                <div id="top-right-container">
+
+                    <div id="help-container" data-toggle="modal" data-target=".modal">
+                        <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
+                    </div>
+
+                    <div id="theme-toggle-container">
+                        <label class="theme-switch">
+                            <input type="checkbox" id="theme-toggle" />
+                            <span class="slider" id="theme-slider">
+                      <i class="fas fa-moon dark-icon"></i>
+                      <i class="fas fa-sun light-icon"></i>
+                    </span>
+                        </label>
+                    </div>
+
                 </div>
+
             </div>
+
             <div id="form-container">
                 <div id="form-inner">
                     <h3 id="form-title">Edit annotation</h3>
@@ -77,7 +90,7 @@
                         <div id="digobj-container" class="form-group">
                             <div class="tooltip-div">
                                 <label for="digobj-url" class="form-label label-tooltip">Digital objects</label>
-                                <a class="tooltips" data-bs-toggle="tooltip" title="A valid URL is required, e.g. https://www.example.com" href="#">
+                                <a class="tooltips" data-bs-toggle="tooltip" title="A valid URL is required (e.g. https://www.example.com)." href="#">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </a>
                             </div>
@@ -97,7 +110,7 @@
                         <div id="entities-container" class="form-group">
                             <div class="tooltip-div">
                                 <label for="entities" class="form-label label-tooltip">Entities</label>
-                                <a class="tooltips" data-bs-toggle="tooltip" title="Entities are searched on Wikidata." href="#">
+                                <a class="tooltips" data-bs-toggle="tooltip" title="Entities are searched on Wikidata. You can also type the identifier to retrieve the exact entity (e.g. Q13375)." href="#">
                                     <i class="fa-solid fa-circle-info"></i>
                                 </a>
                             </div>
@@ -136,7 +149,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title"></h5>
+                        <h3 class="modal-title" id="modal-title"></h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

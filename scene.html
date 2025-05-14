@@ -7,11 +7,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" href="./lib/style.css">
-        <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js/aframe/build/aframe-ar.js"></script>
-        <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
         <script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="./lib/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -21,10 +17,30 @@
     </head>
 
     <body id="index-container">
-        <div id="annotationsPanel" class="disable-select"></div>
+
         <div id="loader"></div>
-        <div id="help-container" data-toggle="modal" data-target=".modal">
-            <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
+
+        <div id="control-panel-container">
+            <button type="button" id="back-to-home" class="btn btn-default">&larr; Back to home</button>
+            <div id="annotationsPanel" class="disable-select"></div>
+        </div>
+
+        <div id="top-right-container">
+
+            <div id="help-container" data-toggle="modal" data-target=".modal">
+                <i id="help-icon" class="fa-solid fa-circle-info fa-xl"></i>
+            </div>
+
+            <div id="theme-toggle-container">
+                <label class="theme-switch">
+                    <input type="checkbox" id="theme-toggle" />
+                    <span class="slider" id="theme-slider">
+                      <i class="fas fa-moon dark-icon"></i>
+                      <i class="fas fa-sun light-icon"></i>
+                    </span>
+                </label>
+            </div>
+
         </div>
 
         <!-- Modal container -->
@@ -32,7 +48,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title"></h5>
+                        <h3 class="modal-title" id="modal-title"></h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

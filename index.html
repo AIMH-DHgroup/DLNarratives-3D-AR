@@ -7,23 +7,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"/>
         <title>DLNarratives - 3D and AR version</title>
         <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-        <link rel="stylesheet" type="text/css" href="./../lib/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./lib/style_main.css">
-        <script src="./lib/es6-shim.min.js"></script>
         <script src="./lib/jquery-3.2.1.min.js"></script>
         <script src="./lib/jquery-ui.min.js"></script>
-        <script src="./lib/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script src="./lib/script_main.js"></script>
 
     </head>
     <body>
 
-        <div class="container">
+        <div id="loader"></div>
+        <div id="alert-placeholder"></div>
+
+        <div class="container" id="login-container">
+            <h1>Login</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username" id="username-label">Username</label>
+                    <input type="text" class="form-control form-login" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password" id="password-label">Password</label>
+                    <input type="password" class="form-control form-login" id="password" placeholder="Password" required>
+                </div>
+                <button type="button" id="login-button" class="btn btn-primary">Login</button>
+
+                <div id="request-account-container">
+                    <p class="text-center mt-3">
+                        Don’t have an account? <a href="mailto:emanuele.lenzi@isti.cnr.it?subject=Request%20for%20Account" id="request-account-link">Request an account</a>.
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="container hidden" id="main-form-container">
 
             <h1>DLNarratives - 3D and AR version</h1>
 
-            <div id="alert-placeholder"></div>
-            <div id="loader"></div>
+            <div id="welcome">
+
+                <p>Welcome, <span id="welcome-user"></span></p>
+                <button type="button" id="logout-btn" class="btn btn-default">Logout</button>
+
+            </div>
 
             <form id="form-model">
 
@@ -43,11 +70,32 @@
 
         </div>
 
+        <!-- Modal container -->
+        <div class="modal fade" id="modal-container" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modal-title"></h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="modal-dismiss"></button>
+                        <button type="button" class="btn btn-primary" id="modal-confirm" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <footer>
 
-            <div id="logo-container"><img id="logo" src="img/aimh-lab.png" alt="AIMH-Lab logo"> <p> &copy; 2025 <a href="https://www.isti.cnr.it/en/" target="_blank">ISTI-CNR</a>, <a href="https://aimh.isti.cnr.it/research-highlights-humanities/" target="_blank">Digital Humanities Group of AIMH-Lab</a>. All rights reserved.</p></div>
+            <div id="logo-container"><img id="logo" src="img/aimh-lab.png" alt="AIMH-Lab logo"> <p> &#169; 2025 <a href="https://www.isti.cnr.it/en/" target="_blank">ISTI-CNR</a>, <a href="https://aimh.isti.cnr.it/research-highlights-humanities/" target="_blank">Digital Humanities Group of AIMH-Lab</a>. All rights reserved.</p></div>
 
             <p>GitHub repository available <a href="https://github.com/AIMH-DHgroup/DLNarratives-3D-AR" target="_blank">here</a>.</p>
+
+            <p><a href="mailto:claudio.demartino@isti.cnr.it?subject=Bug%20report">Report a bug</a>.</p>
 
         </footer>
 

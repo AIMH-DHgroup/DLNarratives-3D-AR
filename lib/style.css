@@ -4,6 +4,10 @@ body {
     display: flex;
 }
 
+#canvas-scene {
+    visibility: hidden;
+}
+
 /* start loader */
 #loader, #entity-loader {
     aspect-ratio: 1;
@@ -18,6 +22,8 @@ body {
     top: 50%;
     left: 50%;
     width: 50px;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: l26 1s infinite steps(12);
 }
 
 #entity-loader {
@@ -54,16 +60,109 @@ body {
 }
 
 @keyframes l26 {
-    100% {transform:rotate(1turn)}
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 /* end loader */
+
+/* start tooltips */
+.tooltip .arrow::before {
+    border-color: transparent !important;
+}
+
+.tooltip.bs-tooltip-top .arrow::before {
+    border-top-color: #6c757d !important;
+}
+
+.tooltip.bs-tooltip-bottom .arrow::before {
+    border-bottom-color: #6c757d !important;
+}
+
+.tooltip.bs-tooltip-left .arrow::before {
+    border-left-color: #6c757d !important;
+}
+
+.tooltip.bs-tooltip-right .arrow::before {
+    border-right-color: #6c757d !important;
+}
+
+.tooltip-inner {
+    background-color: #6c757d !important;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.tooltip.show {
+    opacity: 1 !important;
+}
+/* end tooltips */
 
 .fa-circle-info {
     color: white;
 }
 
+/* start theme toggle */
+.theme-switch {
+    cursor: pointer;
+    margin-bottom: 0 !important;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.theme-switch .slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50px;
+    transition: background 0.2s ease;
+}
+
+.theme-light .theme-switch .slider {
+    background: #ddd;
+}
+
+.slider i {
+    font-size: 1.2rem;
+    color: white;
+    transition: opacity 0.2s ease;
+}
+
+.theme-light .slider .fa-moon {
+    opacity: 0;
+    color: black;
+}
+
+.theme-light .slider .fa-sun {
+    opacity: 1;
+    color: white;
+}
+
+.theme-dark .slider .fa-moon {
+    opacity: 1;
+    color: black;
+}
+
+.theme-dark .slider .fa-sun {
+    opacity: 0;
+    color: white;
+}
+/* end theme toggle */
+
 .modal {
     z-index: 999999;
+}
+
+#canvas-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    transition: background 0.2s ease;
 }
 
 #video {
@@ -80,29 +179,33 @@ body {
     visibility: hidden;
 }
 
-#help-container {
+#top-right-container {
+    display: none;
     position: absolute;
     top: 10px;
     right: 10px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
+    gap: 10px;
 }
 
+#help-container {
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#help-icon, #ARButton, #custom-annotations {
+    transition: 0.2s ease;
+}
 
 .annotation {
     position: absolute;
-    top: 0; /*0*/
-    left: 0; /*0*/
+    top: 0;
+    left: 0;
     z-index: 99999;
     margin-left: 0;
     margin-top: 0;
     padding: 1em;
-    /*width: 300px;*/
     width: 45%;
     max-height: fit-content;
     color: #fff;
@@ -110,12 +213,10 @@ body {
     border-radius: .5em;
     font-size: 12px;
     line-height: 1.2;
-    transition: opacity .5s;
-    /*width: 15vw;*/
+    transition: opacity .5s background-color .2s color .2s;
     height: 35vh;
     overflow: scroll;
     &::before {
-        /*content: attr(data-before);*/
         position: absolute;
         top: -30px;
         left: -30px;
@@ -146,21 +247,40 @@ body {
     border: 1px solid white;
 }
 
-#annotationsPanel {
+#control-panel-container {
     position: absolute;
-    width: auto;
-    height: auto;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    pointer-events: none;
+}
+
+#back-to-home {
+    display: none;
+    pointer-events: auto;
+}
+
+#back-to-home:active {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+}
+
+#annotationsPanel {
+    display: none;
+    width: fit-content;
     max-width: 180px;
-    max-height: 85%;
+    max-height: 400px;
     color: white;
-    top: 60px;
-    left: 4px;
     font-size: 2vmin;
     text-wrap: nowrap;
     background: #ffffff;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    pointer-events: auto;
+    transition: 0.2s;
 }
 
 #buttons-container {
@@ -231,6 +351,7 @@ body {
     width: 100%;
     padding: 10px;
     background-color: #f9f9f9;
+    border-radius: 5px;
 }
 
 .delete-annotation {
@@ -264,10 +385,12 @@ body {
     min-width: 100px;
     max-width: 150px;
     width: 100%;
+    transition: 0.2s;
 }
 
 #digobj-table a div:hover {
     background-color: rgb(247, 243, 245);
+    transition: 0.2s;
 }
 
 .digobj-deleteButton {
@@ -277,8 +400,8 @@ body {
     left: 5px;
 }
 
-.wikidata-entities:hover {
-    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05));
+.wikidata-entities {
+    transition: 0.2s;
 }
 
 .hidden-true-value {
@@ -303,6 +426,15 @@ body {
 
 .annotation-description h5 {
     margin-top: .5rem;
+}
+
+.tl-entities a {
+    color: #3898FF !important;
+    transition: 0.2s;
+}
+
+.tl-entities a:hover {
+    color: #007bff !important;
 }
 
 .dragging {
@@ -359,6 +491,10 @@ body {
     user-select: none;
 }
 
+#scene-container, #form-container, #panel-container {
+    border-radius: 5px;
+}
+
 #grid-container {
     display: grid;
     grid-template-columns: 3fr 1fr;
@@ -366,6 +502,7 @@ body {
     height: 100%;
     width: 100%;
     gap: 10px;
+    visibility: hidden;
 }
 
 #scene-container {
@@ -486,25 +623,40 @@ input:focus {
     z-index: 99999;
 }
 
+.btn-secondary:hover {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)) !important;
+    transition: 0.2s;
+}
+
+.btn-secondary {
+    transition: 0.2s;
+}
+
 .btn-default {
-    color: #333;
-    background-color: #fff;
+    color: white;
+    background-color: dimgray;
     border-color: #ccc;
-    transition: 0ms;
+    transition: 0.2s;
 }
 
 .btn-default:hover {
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
-    transition: 0ms;
+    transition: 0.2s;
 }
 
 .btn-default:active {
     background-color: #e6e6e6;
     border-color: #adadad;
     box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-    transition: 0ms;
+    transition: 0.2s;
+}
+
+.annotationsPanel-dark {
+    background: lightgrey !important;
+    box-shadow: 0 4px 10px rgba(105, 105, 105, 0.4) !important;
+    transition: 0.2s !important;
 }
 
 .btn-delete {
@@ -516,6 +668,11 @@ input:focus {
 .btn-delete:hover {
     color: white;
     background-color: #c92723;
+}
+
+.btn-secondary-dark {
+    background-color: #535C5F;
+    border-color: black;
 }
 
 #selected-items {
