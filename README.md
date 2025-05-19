@@ -12,9 +12,6 @@ This is a semi-automatic tool to construct and visualise "3D and AR narratives",
 ## Dependencies
 If you want to install this tool on your machine, you have to install software like XAMPP that provides the Apache web server and the latest versions of PHP.
 
-## Configuration and Installation
-There is no need to configure anything. The main page is index0.html in the root of the project, so make sure to bookmark it.
-
 ## Dependencies
 To use the tool, the following software is needed:
 - [PostgreSQL](https://www.postgresql.org/)
