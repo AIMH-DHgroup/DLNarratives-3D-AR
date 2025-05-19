@@ -10,9 +10,6 @@ This is a semi-automatic tool to construct and visualise "3D and AR narratives",
 -  💯 Compatibility with SMBVT
 
 ## Dependencies
-If you want to install this tool on your machine, you have to install software like XAMPP that provides the Apache web server and the latest versions of PHP.
-
-## Dependencies
 To use the tool, the following software is needed:
 - [PostgreSQL](https://www.postgresql.org/)
 - If you want to install the system on your machine, you have to install software like XAMPP that provides the Apache web server and the latest versions of PHP.
