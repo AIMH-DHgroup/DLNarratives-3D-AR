@@ -10,10 +10,9 @@ body {
 
 /* start loader */
 #loader, #entity-loader {
-    aspect-ratio: 1;
     display: grid;
+    aspect-ratio: 1;
     -webkit-mask: conic-gradient(from 15deg,#0000,#000);
-    animation: l26 1s infinite steps(12);
     z-index: 9999999;
 }
 
@@ -23,13 +22,14 @@ body {
     left: 50%;
     width: 50px;
     transform: translate(-50%, -50%) rotate(0deg);
-    animation: l26 1s infinite steps(12);
+    animation: loader-rotate 1s infinite steps(12);
 }
 
 #entity-loader {
     position: relative;
     width: 25px;
     overflow: hidden;
+    animation: entity-rotate 1s infinite steps(12);
 }
 
 #entity-loader-div {
@@ -59,10 +59,14 @@ body {
     transform: rotate(60deg);
 }
 
-@keyframes l26 {
+@keyframes loader-rotate {
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
     }
+}
+
+@keyframes entity-rotate {
+    100% {transform:rotate(1turn)}
 }
 /* end loader */
 

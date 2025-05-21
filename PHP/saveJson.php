@@ -16,9 +16,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fileName = $input['fileName'] ?? 'default.json';
     $jsonData = $input['data'] ?? '';
 
+    // Get username
+    $username = stripslashes($_SESSION['login_user']);
+    $username = pg_escape_string($username);
+
     $fileName = basename($fileName); // Remove unsafe paths
 
-    $filePath = getcwd() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'json'. DIRECTORY_SEPARATOR . $fileName;
+    $uploadDir = getcwd() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'json'. DIRECTORY_SEPARATOR . $username . DIRECTORY_SEPARATOR;
+
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $filePath = getcwd() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'json'. DIRECTORY_SEPARATOR . $username . DIRECTORY_SEPARATOR . $fileName;
 
     // Overwrite the file
     if (file_put_contents($filePath, $jsonData)) {
