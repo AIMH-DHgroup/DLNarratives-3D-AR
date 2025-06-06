@@ -8,6 +8,7 @@
         <title>DLNarratives - 3D and AR version</title>
         <link rel="icon" type="image/x-icon" href="img/favicon.ico">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link rel="stylesheet" type="text/css" href="./lib/style_main.css">
         <script src="./lib/jquery-3.2.1.min.js"></script>
         <script src="./lib/jquery-ui.min.js"></script>
@@ -56,12 +57,11 @@
 
                 <div id="model-div">
 
-                    <label for="models-available">Select a model:</label>
-                    <select id="models-available" class="form-control centered mb-3">
-                        <option selected disabled>Select a model</option>
-                    </select>
-                    <p id="or">or</p>
-                    <button type="button" id="upload-model" class="btn btn-primary" onclick="document.getElementById('model-input').click();">Upload model</button>
+                    <div id="model-list-container">
+                        <div id="model-list"></div>
+                    </div>
+
+                    <button type="button" id="upload-model" class="btn btn-primary" onclick="document.getElementById('model-input').click();">Upload model <i class="fa-solid fa-upload"></i></button>
                     <input type="file" id="model-input" class="hidden" accept=".glb">
 
                 </div>
