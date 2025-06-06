@@ -781,4 +781,14 @@ input:focus {
         grid-row: 3;
         z-index: 2; /* prevent annotation to overlap */
     }
+
+    .annotation-item {
+        gap: 5px;
+        overflow-x: scroll;
+    }
+
+    .annotation-title-div {
+        flex: 0 0 170px !important;
+        text-wrap: nowrap;
+    }
 }

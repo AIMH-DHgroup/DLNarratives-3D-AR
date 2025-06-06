@@ -32,21 +32,21 @@ footer p {
     color: #333;
     background-color: #fff;
     border-color: #ccc;
-    transition: 0ms;
+    transition: 0.2s;
 }
 
 .btn-default:hover {
     color: #333;
     background-color: #e6e6e6;
     border-color: #adadad;
-    transition: 0ms;
+    transition: 0.2s;
 }
 
 .btn-default:active {
     background-color: #e6e6e6;
     border-color: #adadad;
     box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-    transition: 0ms;
+    transition: 0.2s;
 }
 
 /* start loader */
@@ -169,6 +169,15 @@ select:focus {
     width: auto !important;
 }
 
+.form-control::placeholder {
+    color: #8C939B !important;
+    opacity: 1; /* Firefox */
+}
+
+.form-control::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #8C939B !important;
+}
+
 #welcome {
     position: absolute;
     top: 15px;
@@ -198,6 +207,61 @@ select:focus {
     padding: 4px 8px;
     border: 1px solid #ccc;
     transition: 0.2s;
+}
+
+#model-list-container {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 220px;
+    overflow-y: auto;
+    border-radius: 8px;
+    z-index: 2; /* prevent model to overlap */
+}
+
+.model-item {
+    display: flex;
+    border: 1px solid rgb(158, 158, 158);
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.model-title-div {
+    flex: 0 0 350px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.model-name {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.model-buttons-div {
+    display: flex;
+    gap: 5px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.delete-model {
+    color: #000;
+}
+
+.btn-delete {
+    background-color: white;
+    border: 1px solid #bbb;
+    color: #AD1A00;
+}
+
+.btn-delete:hover {
+    color: white;
+    background-color: #c92723;
 }
 
 #request-account-container {
@@ -262,6 +326,8 @@ select:focus {
         display: flex;
         flex-direction: column;
         align-items: stretch;
+        width: 100%;
+        position: static;
     }
 
     #model-div label,
@@ -282,4 +348,20 @@ select:focus {
         max-width: 100%;
         height: auto;
     }
+
+    .model-item {
+        gap: 5px;
+        overflow-x: scroll;
+    }
+
+    .model-buttons-div .btn {
+        margin-bottom: 0 !important;
+    }
+
+    .model-title-div {
+        flex: 0 0 150px !important;
+    }
+
+
+
 }
